@@ -6,15 +6,15 @@ export function initThreeScene() {
   const container = document.getElementById('canvas-container');
   if (!container) return;
 
-  // 1. Escena
+  // 1. Scene
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color('#202020'); // Fondo temporal del canvas
+  scene.background = new THREE.Color('#202020'); // Temporary canvas background
 
-  // 2. Cámara
+  // 2. Camera
   const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 100);
   camera.position.set(5, 5, 5);
 
-  // 3. Renderizador
+  // 3. Renderer
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setSize(container.clientWidth, container.clientHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -22,12 +22,12 @@ export function initThreeScene() {
   renderer.toneMappingExposure = 1;
   container.appendChild(renderer.domElement);
 
-  // 4. Controles (OrbitControls) - Permite rotar, zoom y paneo
+  // 4. Controls (OrbitControls) - Allows rotation, zoom, and panning
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true; // Rotación suave
+  controls.enableDamping = true; // Smooth rotation
   controls.dampingFactor = 0.05;
 
-  // 5. Iluminación
+  // 5. Lighting
   const ambientLight = new THREE.AmbientLight(0xffffff, 0.5); 
   scene.add(ambientLight);
 
@@ -35,15 +35,15 @@ export function initThreeScene() {
   directionalLight.position.set(5, 10, 7);
   scene.add(directionalLight);
 
-  // 6. Cargar Modelo GLTF/GLB
-  let mixer; // Para animaciones que vengan dentro del modelo
-  let modelGroup; // Referencia para poder rotarlo manualmente
+  // 6. Load GLTF/GLB Model
+  let mixer; // For animations that come inside the model
+  let modelGroup; // Reference to rotate it manually
   
   const loader = new GLTFLoader();
   
-  // -- PLACEHOLDER TEMPORAL --
-  // Como aún no tenemos tu modelo .glb, cargamos un cubo. 
-  // Cuando tengas tu modelo, comenta estas 4 líneas y descomenta la sección de abajo.
+  // -- TEMPORARY PLACEHOLDER --
+  // Since we don't have your .glb model yet, we load a cube. 
+  // When you have your model, comment out these 4 lines and uncomment the section below.
   const geometry = new THREE.BoxGeometry(2, 2, 2);
   const material = new THREE.MeshStandardMaterial({ color: 0x3b82f6 });
   const cube = new THREE.Mesh(geometry, material);
@@ -51,19 +51,19 @@ export function initThreeScene() {
   modelGroup = cube;
 
   /*
-  // -- CÓDIGO PARA TU MODELO REAL --
-  // Pon tu archivo .glb en la carpeta "public" y carga su ruta (ej: '/mi-setup.glb')
+  // -- CODE FOR YOUR REAL MODEL --
+  // Put your .glb file in the "public" folder and load its path (e.g. '/my-setup.glb')
   loader.load(
     '/tu-modelo.glb',
     function (gltf) {
       modelGroup = gltf.scene;
       scene.add(modelGroup);
       
-      // Ajustar escala/posición si tu modelo es muy grande o muy pequeño:
+      // Adjust scale/position if your model is too big or too small:
       // modelGroup.scale.set(1, 1, 1);
       // modelGroup.position.set(0, 0, 0);
 
-      // Reproducir la primera animación si el modelo tiene alguna
+      // Play the first animation if the model has one
       if (gltf.animations && gltf.animations.length > 0) {
         mixer = new THREE.AnimationMixer(modelGroup);
         const action = mixer.clipAction(gltf.animations[0]);
@@ -72,19 +72,19 @@ export function initThreeScene() {
     },
     undefined,
     function (error) {
-      console.error('Error al cargar el modelo 3D:', error);
+      console.error('Error loading 3D model:', error);
     }
   );
   */
 
-  // 7. Responsive: Manejo de redimensionamiento
+  // 7. Responsive: Resize handling
   window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
   });
 
-  // 8. Interactividad: Botones en la UI interactuando con el 3D
+  // 8. Interactivity: UI buttons interacting with the 3D scene
   let isAnimating = true;
   const toggleAnimBtn = document.getElementById('toggle-anim-btn');
   toggleAnimBtn.addEventListener('click', () => {
@@ -96,15 +96,15 @@ export function initThreeScene() {
   toggleLightBtn.addEventListener('click', () => {
     lightColorToggle = !lightColorToggle;
     if (lightColorToggle) {
-      directionalLight.color.setHex(0xffaa00); // Luz cálida anaranjada
+      directionalLight.color.setHex(0xffaa00); // Warm orange light
       directionalLight.intensity = 1.5;
     } else {
-      directionalLight.color.setHex(0xffffff); // Luz blanca
+      directionalLight.color.setHex(0xffffff); // White light
       directionalLight.intensity = 1;
     }
   });
 
-  // 9. Ciclo de Animación (Render Loop)
+  // 9. Animation Loop (Render Loop)
   const clock = new THREE.Clock();
 
   function animate() {
@@ -113,7 +113,7 @@ export function initThreeScene() {
     const delta = clock.getDelta();
 
     if (isAnimating && modelGroup) {
-      // Rotar lentamente el modelo completo (o el cubo de prueba)
+      // Slowly rotate the entire model (or test cube)
       modelGroup.rotation.y += 0.5 * delta;
     }
 
@@ -121,7 +121,7 @@ export function initThreeScene() {
       mixer.update(delta);
     }
 
-    controls.update(); // Requerido para que funcione el damping
+    controls.update(); // Required for damping to work
     renderer.render(scene, camera);
   }
 

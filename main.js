@@ -5,7 +5,7 @@ import { initThreeScene } from './three-scene.js';
 const themeToggleBtn = document.getElementById('theme-toggle');
 const currentTheme = localStorage.getItem('theme');
 
-// Establecer el tema inicial
+// Set initial theme
 if (currentTheme) {
   document.documentElement.setAttribute('data-theme', currentTheme);
   themeToggleBtn.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
@@ -27,7 +27,7 @@ themeToggleBtn.addEventListener('click', () => {
   }
 });
 
-// Inicializar la escena 3D una vez que el DOM esté listo
+// Initialize the 3D scene once the DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
   initThreeScene();
 });

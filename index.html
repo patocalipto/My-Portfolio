@@ -1,65 +1,68 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mi Portafolio 3D</title>
-  <meta name="description" content="Portafolio personal con entorno 3D">
+  <title>My 3D Portfolio</title>
+  <meta name="description" content="Personal portfolio with 3D environment">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header>
     <div class="header-container">
-      <h1>[Tu Nombre]</h1>
+      <h1>Alexis Pantoja</h1>
       <nav>
         <ul>
-          <li><a href="#about">Sobre Mí</a></li>
-          <li><a href="#3d-setup">Entorno 3D</a></li>
-          <li><a href="#projects">Proyectos</a></li>
-          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#about">About Me</a></li>
+          <li><a href="#3d-setup">3D Environment</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button id="theme-toggle" aria-label="Cambiar tema">🌙</button>
+      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
     </div>
   </header>
 
   <main>
     <section id="hero">
       <div class="hero-content">
-        <img src="https://via.placeholder.com/150" alt="Avatar de [Tu Nombre]" class="avatar" />
-        <h2>Hola, soy [Tu Nombre]</h2>
-        <p>Desarrollador y Entusiasta del 3D</p>
+        <img src="https://via.placeholder.com/150" alt="[Alexis]'s Avatar" class="avatar" />
+        <h2>Hello, I'm Alexis Pantoja</h2>
+        <p>Developer in constant learning.</p>
       </div>
     </section>
 
     <section id="about">
-      <h2>Sobre Mí</h2>
-      <p>Aquí puedes escribir una breve introducción sobre quién eres y lo que te apasiona.</p>
+      <h2>About Me</h2>
+      <p>I’m a Computer Systems Engineering student at the Instituto Tecnológico de Mérida. Passionate about new technologies and software development, I enjoy spending my free time building database-driven applications. Currently, I'm expanding my skill set by exploring the world of 3D modeling.</p>
       
-      <h3>Habilidades</h3>
+      <h3>Skills</h3>
       <ul class="skills-list">
         <li>HTML & CSS</li>
         <li>JavaScript</li>
         <li>Three.js</li>
         <li>Blender</li>
+        <li>Python</li>
+        <li>AppSheet</li>
+        <li>SQL</li>
       </ul>
     </section>
 
     <section id="3d-setup">
       <div class="three-container-wrapper">
-        <h2>Mi Espacio de Trabajo</h2>
+        <h2>My Workspace</h2>
         <div id="canvas-container">
           <!-- Aquí se renderizará el canvas de Three.js -->
         </div>
         <div class="three-controls">
-          <button id="toggle-light-btn">Cambiar Iluminación 💡</button>
-          <button id="toggle-anim-btn">Pausar/Reanudar Animación ⏸️</button>
+          <button id="toggle-light-btn">Toggle Lighting 💡</button>
+          <button id="toggle-anim-btn">Pause/Resume Animation ⏸️</button>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <h2>Proyectos</h2>
+      <h2>Projects</h2>
       <div class="projects-grid">
         <article class="project-card">
           <h3>Animación Rive</h3>
@@ -75,13 +78,13 @@
   </main>
 
   <footer id="contact">
-    <h2>Contacto</h2>
-    <p>Puedes encontrarme en:</p>
+    <h2>Contact</h2>
+    <p>You can find me on:</p>
     <ul class="social-links">
       <li><a href="#">LinkedIn</a></li>
       <li><a href="#">GitHub</a></li>
     </ul>
-    <p>&copy; 2026 [Tu Nombre]. Todos los derechos reservados.</p>
+    <p>&copy; 2026 [Alexis Pantoja]. All rights reserved.</p>
   </footer>
 
   <script type="module" src="./main.js"></script>
