@@ -31,3 +31,19 @@ themeToggleBtn.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
   initThreeScene();
 });
+
+// --- Copy to Clipboard Logic ---
+const copyEmailBtn = document.getElementById('copy-email-btn');
+if (copyEmailBtn) {
+  copyEmailBtn.addEventListener('click', () => {
+    const emailText = document.getElementById('email-text').textContent;
+    navigator.clipboard.writeText(emailText).then(() => {
+      copyEmailBtn.textContent = 'Copied! ✅';
+      setTimeout(() => {
+        copyEmailBtn.textContent = '📋 Copy';
+      }, 2000);
+    }).catch(err => {
+      console.error('Failed to copy email: ', err);
+    });
+  });
+}

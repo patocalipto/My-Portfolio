@@ -126,11 +126,22 @@
   <footer id="contact">
     <h2 class="gradient-text">Let's Connect</h2>
     <p>Find me on my social networks or check out my repositories:</p>
-    <ul class="social-links">
+    <ul class="social-links" style="margin-bottom: 2rem;">
       <li><a href="https://www.linkedin.com/in/YOUR_LINKEDIN_USERNAME/" target="_blank">LinkedIn</a></li>
       <li><a href="https://github.com/patocalipto" target="_blank">GitHub</a></li>
-      <li><a href="mailto:your.email@example.com">Email</a></li>
     </ul>
+
+    <div class="email-container glass" style="margin: 1.5rem auto; max-width: 480px; padding: 1rem 1.5rem; border-radius: 16px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; border: 1px solid var(--border-color); flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 0.75rem;">
+        <span style="font-size: 1.2rem;">📧</span>
+        <span class="code-font" id="email-text" style="font-size: 0.95rem; font-weight: 500; letter-spacing: -0.02em;">patricio.pantoja.lee@gmail.com</span>
+      </div>
+      <div style="display: flex; gap: 0.5rem; width: auto; justify-content: flex-end;">
+        <button id="copy-email-btn" class="btn glass-btn" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: 8px; margin: 0;" title="Copy to clipboard">📋 Copy</button>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=patricio.pantoja.lee@gmail.com" target="_blank" class="btn" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem; margin: 0;" title="Open in Gmail (Web)">✉️ Gmail</a>
+      </div>
+    </div>
+
     <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.9rem;">&copy; 2026 Alexis Pantoja. All rights reserved.</p>
   </footer>
 
