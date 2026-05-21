@@ -106,12 +106,15 @@ export function initThreeScene() {
   });
 
   // 9. Ciclo de Animación (Render Loop)
-  const clock = new THREE.Clock();
+  let lastTime = 0;
 
-  function animate() {
+  function animate(time) {
     requestAnimationFrame(animate);
 
-    const delta = clock.getDelta();
+    // Calcular el delta de tiempo en segundos de forma estándar
+    if (!lastTime) lastTime = time;
+    const delta = Math.min((time - lastTime) / 1000, 0.1); // Limitar delta para evitar saltos bruscos
+    lastTime = time;
 
     if (isAnimating && pivotGroup) {
       // Rotar lentamente el grupo pivote (que ya tiene el modelo centrado)
@@ -126,5 +129,5 @@ export function initThreeScene() {
     renderer.render(scene, camera);
   }
 
-  animate();
+  requestAnimationFrame(animate);
 }
