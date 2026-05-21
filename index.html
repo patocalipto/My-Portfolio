@@ -1,90 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My 3D Portfolio</title>
-  <meta name="description" content="Personal portfolio with 3D environment">
+  <meta name="description" content="Personal portfolio with an interactive 3D environment">
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <header>
     <div class="header-container">
-      <h1>Alexis Pantoja</h1>
+      <h2 class="gradient-text">[Your Name]</h2>
       <nav>
         <ul>
           <li><a href="#about">About Me</a></li>
-          <li><a href="#3d-setup">3D Environment</a></li>
+          <li><a href="#3d-setup">My Setup</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-      <button id="theme-toggle" aria-label="Toggle theme">🌙</button>
+      <button id="theme-toggle" aria-label="Toggle theme">☀️</button>
     </div>
   </header>
 
   <main>
     <section id="hero">
       <div class="hero-content">
-        <img src="https://via.placeholder.com/150" alt="[Alexis]'s Avatar" class="avatar" />
-        <h2>Hello, I'm Alexis Pantoja</h2>
-        <p>Developer in constant learning.</p>
+        <div class="avatar-container">
+          <div class="avatar-glow"></div>
+          <img src="https://via.placeholder.com/160" alt="Avatar" class="avatar" />
+        </div>
+        <h1 class="gradient-text">Hi, I'm [Your Name]</h1>
+        <p class="code-font">&lt; Creative Developer &amp; 3D Enthusiast /&gt;</p>
       </div>
     </section>
 
     <section id="about">
-      <h2>About Me</h2>
-      <p>I’m a Computer Systems Engineering student at the Instituto Tecnológico de Mérida. Passionate about new technologies and software development, I enjoy spending my free time building database-driven applications. Currently, I'm expanding my skill set by exploring the world of 3D modeling.</p>
-      
-      <h3>Skills</h3>
-      <ul class="skills-list">
-        <li>HTML & CSS</li>
-        <li>JavaScript</li>
-        <li>Three.js</li>
-        <li>Blender</li>
-        <li>Python</li>
-        <li>AppSheet</li>
-        <li>SQL</li>
-      </ul>
+      <h2 class="section-title gradient-text">About Me</h2>
+      <div class="about-content glass" style="padding: 2rem; border-radius: 20px;">
+        <p>Here you can write a brief introduction about who you are, your academic background, and what you are passionate about in the world of technology and design.</p>
+        
+        <h3 style="margin: 2rem 0 1rem; color: var(--accent-color);">Stack & Skills</h3>
+        <ul class="skills-list">
+          <li class="glass">HTML5 & CSS3</li>
+          <li class="glass">Modern JavaScript</li>
+          <li class="glass">Three.js / WebGL</li>
+          <li class="glass">Blender (3D Modeling)</li>
+          <li class="glass">Rive (Animation)</li>
+        </ul>
+      </div>
     </section>
 
     <section id="3d-setup">
       <div class="three-container-wrapper">
-        <h2>My Workspace</h2>
-        <div id="canvas-container">
-          <!-- Aquí se renderizará el canvas de Three.js -->
+        <h2 class="section-title gradient-text">My 3D Environment</h2>
+        <div id="canvas-container" class="glass">
+          <!-- The Three.js canvas will render here -->
         </div>
         <div class="three-controls">
-          <button id="toggle-light-btn">Toggle Lighting 💡</button>
-          <button id="toggle-anim-btn">Pause/Resume Animation ⏸️</button>
+          <button id="toggle-anim-btn" class="btn">Pause/Resume Animation ⏸️</button>
+          <button id="toggle-light-btn" class="btn glass-btn">Toggle Lighting 💡</button>
         </div>
       </div>
     </section>
 
     <section id="projects">
-      <h2>Projects</h2>
+      <h2 class="section-title gradient-text">Featured Projects</h2>
       <div class="projects-grid">
-        <article class="project-card">
-          <h3>Animación Rive</h3>
-          <p>Proyecto interactivo creado con Rive.</p>
-          <!-- Aquí puedes embeber el iframe o canvas de Rive -->
+        <article class="project-card glass">
+          <h3>Interactive Rive Animation</h3>
+          <p class="text-muted">School project demonstrating the use of interactive vector graphics for the web.</p>
+          <div class="project-media">
+            <!-- Paste the Rive iframe down below -->
+            <p style="color: var(--text-muted); opacity: 0.5;">[Rive Iframe Goes Here]</p>
+          </div>
         </article>
-        <article class="project-card">
-          <h3>Otro Proyecto</h3>
-          <p>Descripción breve del proyecto.</p>
+        <article class="project-card glass">
+          <h3>Interactive 3D Scene</h3>
+          <p class="text-muted">The main model of this portfolio, created from scratch in Blender and exported to WebGL.</p>
         </article>
       </div>
-    </section>
+    </section>  
   </main>
 
   <footer id="contact">
-    <h2>Contact</h2>
-    <p>You can find me on:</p>
+    <h2 class="gradient-text">Let's Connect</h2>
+    <p>Find me on my social networks or check out my repositories:</p>
     <ul class="social-links">
       <li><a href="#">LinkedIn</a></li>
       <li><a href="#">GitHub</a></li>
+      <li><a href="#">Email</a></li>
     </ul>
-    <p>&copy; 2026 [Alexis Pantoja]. All rights reserved.</p>
+    <p style="margin-top: 2rem; opacity: 0.5; font-size: 0.9rem;">&copy; 2026 [Your Name]. All rights reserved.</p>
   </footer>
 
   <script type="module" src="./main.js"></script>

@@ -1,6 +1,7 @@
 import * as THREE from 'https://esm.sh/three';
 import { OrbitControls } from 'https://esm.sh/three/examples/jsm/controls/OrbitControls.js';
 import { GLTFLoader } from 'https://esm.sh/three/examples/jsm/loaders/GLTFLoader.js';
+import modelUrl from './assets/3d/protafolio.glb?url';
 
 export function initThreeScene() {
   const container = document.getElementById('canvas-container');
@@ -35,35 +36,36 @@ export function initThreeScene() {
   directionalLight.position.set(5, 10, 7);
   scene.add(directionalLight);
 
-  // 6. Load GLTF/GLB Model
-  let mixer; // For animations that come inside the model
-  let modelGroup; // Reference to rotate it manually
+  // 6. Cargar Modelo GLTF/GLB
+  let mixer; // Para animaciones que vengan dentro del modelo
+  let pivotGroup = new THREE.Group(); // Grupo padre para centrar la rotación
+  scene.add(pivotGroup);
   
   const loader = new GLTFLoader();
   
-  // -- TEMPORARY PLACEHOLDER --
-  // Since we don't have your .glb model yet, we load a cube. 
-  // When you have your model, comment out these 4 lines and uncomment the section below.
-  const geometry = new THREE.BoxGeometry(2, 2, 2);
-  const material = new THREE.MeshStandardMaterial({ color: 0x3b82f6 });
-  const cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
-  modelGroup = cube;
-
-  /*
-  // -- CODE FOR YOUR REAL MODEL --
-  // Put your .glb file in the "public" folder and load its path (e.g. '/my-setup.glb')
+  // Cargar tu modelo real
   loader.load(
-    '/tu-modelo.glb',
+    modelUrl,
     function (gltf) {
-      modelGroup = gltf.scene;
-      scene.add(modelGroup);
+      const modelGroup = gltf.scene;
       
-      // Adjust scale/position if your model is too big or too small:
-      // modelGroup.scale.set(1, 1, 1);
-      // modelGroup.position.set(0, 0, 0);
+      // Calcular el centro exacto (visual) del modelo
+      const box = new THREE.Box3().setFromObject(modelGroup);
+      const center = box.getCenter(new THREE.Vector3());
+      
+      // Mover el modelo para que su centro quede exactamente en (0,0,0)
+      modelGroup.position.x = -center.x;
+      modelGroup.position.y = -center.y;
+      modelGroup.position.z = -center.z;
 
-      // Play the first animation if the model has one
+      // Añadir el modelo al grupo pivot (ahora el pivot girará desde el centro real)
+      pivotGroup.add(modelGroup);
+      
+      // Si tu modelo sale muy grande, muy pequeño o movido, descomenta estas líneas y juega con los valores (aplícalo a pivotGroup):
+      // pivotGroup.scale.set(1, 1, 1);
+      // pivotGroup.position.y = 0; // Para subirlo o bajarlo
+
+      // Reproducir la primera animación si el modelo tiene alguna
       if (gltf.animations && gltf.animations.length > 0) {
         mixer = new THREE.AnimationMixer(modelGroup);
         const action = mixer.clipAction(gltf.animations[0]);
@@ -72,19 +74,18 @@ export function initThreeScene() {
     },
     undefined,
     function (error) {
-      console.error('Error loading 3D model:', error);
+      console.error('Error al cargar el modelo 3D:', error);
     }
   );
-  */
 
-  // 7. Responsive: Resize handling
+  // 7. Responsive: Manejo de redimensionamiento
   window.addEventListener('resize', () => {
     camera.aspect = container.clientWidth / container.clientHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(container.clientWidth, container.clientHeight);
   });
 
-  // 8. Interactivity: UI buttons interacting with the 3D scene
+  // 8. Interactividad: Botones en la UI interactuando con el 3D
   let isAnimating = true;
   const toggleAnimBtn = document.getElementById('toggle-anim-btn');
   toggleAnimBtn.addEventListener('click', () => {
@@ -96,15 +97,15 @@ export function initThreeScene() {
   toggleLightBtn.addEventListener('click', () => {
     lightColorToggle = !lightColorToggle;
     if (lightColorToggle) {
-      directionalLight.color.setHex(0xffaa00); // Warm orange light
+      directionalLight.color.setHex(0xffaa00); // Luz cálida anaranjada
       directionalLight.intensity = 1.5;
     } else {
-      directionalLight.color.setHex(0xffffff); // White light
+      directionalLight.color.setHex(0xffffff); // Luz blanca
       directionalLight.intensity = 1;
     }
   });
 
-  // 9. Animation Loop (Render Loop)
+  // 9. Ciclo de Animación (Render Loop)
   const clock = new THREE.Clock();
 
   function animate() {
@@ -112,16 +113,16 @@ export function initThreeScene() {
 
     const delta = clock.getDelta();
 
-    if (isAnimating && modelGroup) {
-      // Slowly rotate the entire model (or test cube)
-      modelGroup.rotation.y += 0.5 * delta;
+    if (isAnimating && pivotGroup) {
+      // Rotar lentamente el grupo pivote (que ya tiene el modelo centrado)
+      pivotGroup.rotation.y += 0.5 * delta;
     }
 
     if (mixer && isAnimating) {
       mixer.update(delta);
     }
 
-    controls.update(); // Required for damping to work
+    controls.update(); // Requerido para que funcione el damping
     renderer.render(scene, camera);
   }
 
