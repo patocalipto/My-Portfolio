@@ -239,7 +239,7 @@ main > section {
 }
 
 /* 3D Section */
-#3d-setup {
+[id="3d-setup"] {
   position: relative;
 }
 
